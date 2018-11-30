@@ -41,6 +41,7 @@ data=TTJets_SingleLeptFromTbar
 void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
   if (fChain == 0) return;
   std::cout<<" eventloop starts "<<endl;
+  //*AR:181128-fChain->GetEntriesFast() returns the number of entries in the entire chain (all n files included in chain)
   Long64_t nentries = fChain->GetEntriesFast(); //number of entries/events
   cout << "nentries " << nentries << endl;
   cout << "Analyzing dataset " << data << " " << endl;
@@ -78,7 +79,8 @@ void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
   TTree *newtree = fChain->GetTree()->CloneTree(0);
   // TTree *newtree = fChain->GetTree()->CopyTree("HT>200. && MHT>200.");
   string s_data = data;
-  
+  int PassedEntry=0;  
+
   for (Long64_t jentry=0; jentry<nentries;jentry++) {
     // ==============print number of events done == == == == == == == =
     double progress = 10.0 * jentry / (1.0 * nentries);
@@ -86,24 +88,38 @@ void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
     if (k > decade)
       cout << 10 * k << " %" <<endl;
     decade = k;
+    Int_t ientry = LoadTree(jentry);
+    if (ientry < 0) break;
+    //*AR: following updates to nb and nbytes are must, otherwise, LoadTree doesn't know what to do once jentry gets to be larger than the  number of entries in the first file in the chain. That means values from last entry in first file, are repeated for all entries in all files after first file. 
+    nb = fChain->GetEntry(jentry);   nbytes += nb;
+
+    //    std::cout<<" ientry "<<ientry<<endl;
+    //    fChain->GetTree();  
     fChain->GetTree()->GetEntry(jentry);
-  
+    h_selectBaselineYields_->Fill(0);
   /*  
     if(jentry==0){
       newtree = fChain->GetTree()->CloneTree(0); 
     }
 */
-    std::cout<<" jentry "<<jentry<<" run "<<RunNum<<" HT "<<HT<<" MHT "<<MHT<<endl;
-    if(HT<200. || MHT<200.)
+    //    std::cout<<" jentry "<<jentry<<" run "<<RunNum<<" HT "<<HT<<" MHT "<<MHT<<endl;
+    if(MHT<200.)
       continue;
+    h_selectBaselineYields_->Fill(1);
 
-    if(s_data.find("TTJets_SingleLeptFromTbar")!=string::npos || s_data.find("TTJets_SingleLeptFromT")!=string::npos || s_data.find("DiLept")!=string::npos){
+    if(HT<200.)
+      continue;
+    h_selectBaselineYields_->Fill(2);
+
+
+    if(s_data.find("Tbar_SingleLep")!=string::npos || s_data.find("T_SingleLep")!=string::npos || s_data.find("DiLept")!=string::npos){
       Double_t madHTcut=600;   
       if(madHT > madHTcut)
 	continue;
     }
-
-
+    h_selectBaselineYields_->Fill(3);
+    PassedEntry++; 
+    //    std::cout<<" Evtnum "<<EvtNum<<" run "<<RunNum<<" ht "<<HT<<" mht "<<MHT<<" mad "<<madHT<<endl;
     //    fChain->GetTree()->GetEntry(jentry);
     //    std::cout<<" jentry "<<jentry<<" Jets->size() "<<Jets->size()<<endl;
     //    Long64_t ientry = LoadTree(jentry);
@@ -132,6 +148,7 @@ TLorentzVector SkimmingSR::getBestPhoton(){
   int bestPhoIndx=-100;
   TLorentzVector v1;
   vector<TLorentzVector> goodPho;
+  /*
   for(int iPhoton=0;iPhoton<Photons->size();iPhoton++){
     if( ((*Photons_fullID)[iPhoton]) && ((*Photons_hasPixelSeed)[iPhoton]<0.001) ) goodPho.push_back( (*Photons)[iPhoton] );
   }
@@ -145,5 +162,6 @@ TLorentzVector SkimmingSR::getBestPhoton(){
     }
     return goodPho[bestPhoIndx];
   }
+*/
 }
 

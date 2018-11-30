@@ -114,6 +114,7 @@ SkimmingSR::~SkimmingSR() {
   delete fChain->GetCurrentFile();
   oFile->cd();
   h_selectBaselineYields_->Write();
+  /*
   h_met0->Write();
   h_mht0->Write();
   h_ht0->Write();
@@ -121,7 +122,7 @@ SkimmingSR::~SkimmingSR() {
   h_phopt0->Write();
   h_st0->Write();
   h_nhadj->Write();
-
+*/
   oFile->Write();
   oFile->Close();
 
