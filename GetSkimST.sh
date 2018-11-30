@@ -5,7 +5,9 @@ outStr=$2
 
 export SUBMIT_DIR=`pwd -P`
 
-for TStr in t_top t_antitop tW_top tW_antitop s_channel; do
+#for TStr in t_top t_antitop tW_top tW_antitop s_channel; do
+for TStr in t_top t_antitop ; do
+
 #for TTbarStr in HT_1200_2500 HT_600_800 HT_800_1200 HT_2500_Inf; do
 #for TTbarStr in HT_2500_Inf; do
 #for TTbarStr in T_SingleLep Tbar_SingleLep; do

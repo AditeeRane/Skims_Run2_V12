@@ -5,7 +5,9 @@ outStr=$2
 
 export SUBMIT_DIR=`pwd -P`
 
-for WJetStr in 200_400 400_600 600_800 800_1200 1200_2500 2500_Inf; do
+#for WJetStr in 100_200 200_400 400_600 600_800 800_1200 1200_2500 2500_Inf; do
+for WJetStr in 100_200; do
+
 #for WJetStr in 100_200; do
 
 #for TTbarStr in HT_1200_2500 HT_600_800 HT_800_1200 HT_2500_Inf; do
