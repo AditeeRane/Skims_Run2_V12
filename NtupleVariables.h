@@ -52,7 +52,7 @@ class NtupleVariables : public TSelector {
    Int_t           BTagsMVAJERup;
    Double_t        CaloMET;
    Double_t        CaloMETPhi;
-   Double_t        CrossSection;
+   //   Double_t        CrossSection;
    Int_t           CSCTightHaloFilter;
    Double_t        DeltaPhi1;
    Double_t        DeltaPhi1clean;
@@ -95,12 +95,14 @@ class NtupleVariables : public TSelector {
    vector<double>  *ElectronsNoIso_MT2Activity;
    vector<double>  *ElectronsNoIso_MTW;
    vector<bool>    *ElectronsNoIso_tightID;
-   vector<TLorentzVector> *GenElectrons;
-   vector<bool>    *GenElectrons_fromTau;
+   /*   
+	vector<TLorentzVector> *GenElectrons;
+      vector<bool>    *GenElectrons_fromTau;
    vector<double>  *GenElectrons_MT2Activity;
    vector<double>  *GenElectrons_RecoTrkAct;
    vector<double>  *GenElectrons_RecoTrkd3;
    vector<double>  *GenElectrons_RecoTrkIso;
+*/
    Double_t        GenHT;
    vector<TLorentzVector> *GenJets;
    vector<bool>    *GenJets_HTMask;
@@ -115,6 +117,7 @@ class NtupleVariables : public TSelector {
    vector<double>  *GenMuons_RecoTrkAct;
    vector<double>  *GenMuons_RecoTrkd3;
    vector<double>  *GenMuons_RecoTrkIso;
+
    vector<TLorentzVector> *GenParticles;
    vector<int>     *GenParticles_ParentId;
    vector<int>     *GenParticles_ParentIdx;
@@ -267,7 +270,7 @@ class NtupleVariables : public TSelector {
    vector<bool>    *JetsJERup_MHTMask;
    vector<double>  *JetsJERup_muonEnergyFraction;
    vector<int>     *JetsJERup_partonFlavor;
-   Double_t        madHT;
+   //   Double_t        madHT;
    Int_t           madMinDeltaRStatus;
    Double_t        madMinPhotonDeltaR;
    Double_t        MET;
@@ -398,7 +401,7 @@ class NtupleVariables : public TSelector {
    TBranch        *b_BTagsMVAJERup;   //!
    TBranch        *b_CaloMET;   //!
    TBranch        *b_CaloMETPhi;   //!
-   TBranch        *b_CrossSection;   //!
+   //   TBranch        *b_CrossSection;   //!
    TBranch        *b_CSCTightHaloFilter;   //!
    TBranch        *b_DeltaPhi1;   //!
    TBranch        *b_DeltaPhi1clean;   //!
@@ -441,8 +444,8 @@ class NtupleVariables : public TSelector {
    TBranch        *b_ElectronsNoIso_MT2Activity;   //!
    TBranch        *b_ElectronsNoIso_MTW;   //!
    TBranch        *b_ElectronsNoIso_tightID;   //!
-   TBranch        *b_GenElectrons;   //!
-   TBranch        *b_GenElectrons_fromTau;   //!
+   //TBranch        *b_GenElectrons;   //!
+   //   TBranch        *b_GenElectrons_fromTau;   //!
    TBranch        *b_GenElectrons_MT2Activity;   //!
    TBranch        *b_GenElectrons_RecoTrkAct;   //!
    TBranch        *b_GenElectrons_RecoTrkd3;   //!
@@ -613,7 +616,7 @@ class NtupleVariables : public TSelector {
    TBranch        *b_JetsJERup_MHTMask;   //!
    TBranch        *b_JetsJERup_muonEnergyFraction;   //!
    TBranch        *b_JetsJERup_partonFlavor;   //!
-   TBranch        *b_madHT;   //!
+   //   TBranch        *b_madHT;   //!
    TBranch        *b_madMinDeltaRStatus;   //!
    TBranch        *b_madMinPhotonDeltaR;   //!
    TBranch        *b_MET;   //!
@@ -761,12 +764,14 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    ElectronsNoIso_MT2Activity = 0;
    ElectronsNoIso_MTW = 0;
    ElectronsNoIso_tightID = 0;
+   /*
    GenElectrons = 0;
    GenElectrons_fromTau = 0;
    GenElectrons_MT2Activity = 0;
    GenElectrons_RecoTrkAct = 0;
    GenElectrons_RecoTrkd3 = 0;
    GenElectrons_RecoTrkIso = 0;
+*/
    GenJets = 0;
    GenJets_HTMask = 0;
    GenJets_MHTMask = 0;
@@ -1014,8 +1019,8 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    //   fChain->SetBranchStatus("CaloMET",1);
    //   fChain->SetBranchAddress("CaloMETPhi", &CaloMETPhi, &b_CaloMETPhi);
    //   fChain->SetBranchStatus("CaloMETPhi",1);
-   fChain->SetBranchAddress("CrossSection", &CrossSection, &b_CrossSection);
-   fChain->SetBranchStatus("CrossSection",1);
+   //   fChain->SetBranchAddress("CrossSection", &CrossSection, &b_CrossSection);
+   //   fChain->SetBranchStatus("CrossSection",1);
    fChain->SetBranchAddress("CSCTightHaloFilter", &CSCTightHaloFilter, &b_CSCTightHaloFilter);
    fChain->SetBranchStatus("CSCTightHaloFilter",1);
    fChain->SetBranchAddress("DeltaPhi1", &DeltaPhi1, &b_DeltaPhi1);
@@ -1089,10 +1094,13 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    //   fChain->SetBranchStatus("ElectronsNoIso_MTW",1);
    //   fChain->SetBranchAddress("ElectronsNoIso_tightID", &ElectronsNoIso_tightID, &b_ElectronsNoIso_tightID);
    //   fChain->SetBranchStatus("ElectronsNoIso_tightID",1);
+   /*
    fChain->SetBranchAddress("GenElectrons", &GenElectrons, &b_GenElectrons);
    fChain->SetBranchStatus("GenElectrons",1);
    fChain->SetBranchAddress("GenElectrons_fromTau", &GenElectrons_fromTau, &b_GenElectrons_fromTau);
    fChain->SetBranchStatus("GenElectrons_fromTau",1);
+*/
+
    //   fChain->SetBranchAddress("GenElectrons_MT2Activity", &GenElectrons_MT2Activity, &b_GenElectrons_MT2Activity);
    //fChain->SetBranchStatus("GenElectrons_MT2Activity",1);
    //   fChain->SetBranchAddress("GenElectrons_RecoTrkAct", &GenElectrons_RecoTrkAct, &b_GenElectrons_RecoTrkAct);
@@ -1117,10 +1125,13 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    //   fChain->SetBranchStatus("GenMHT",1);
    //   fChain->SetBranchAddress("GenMHTPhi", &GenMHTPhi, &b_GenMHTPhi);
    //   fChain->SetBranchStatus("GenMHTPhi",1);
+   /*
    fChain->SetBranchAddress("GenMuons", &GenMuons, &b_GenMuons);
    fChain->SetBranchStatus("GenMuons",1);
    fChain->SetBranchAddress("GenMuons_fromTau", &GenMuons_fromTau, &b_GenMuons_fromTau);
    fChain->SetBranchStatus("GenMuons_fromTau",1);
+
+*/
    //   fChain->SetBranchAddress("GenMuons_MT2Activity", &GenMuons_MT2Activity, &b_GenMuons_MT2Activity);
    //   fChain->SetBranchAddress("GenMuons_RecoTrkAct", &GenMuons_RecoTrkAct, &b_GenMuons_RecoTrkAct);
    //   fChain->SetBranchAddress("GenMuons_RecoTrkd3", &GenMuons_RecoTrkd3, &b_GenMuons_RecoTrkd3);
@@ -1137,12 +1148,13 @@ void NtupleVariables::Init(TTree *tree, string nameData)
 
    //   fChain->SetBranchAddress("GenParticles_Status", &GenParticles_Status, &b_GenParticles_Status);
    //   fChain->SetBranchStatus("GenParticles_Status",1);
-
+   /*
    fChain->SetBranchAddress("GenTaus", &GenTaus, &b_GenTaus);
    fChain->SetBranchStatus("GenTaus",1);
 
    fChain->SetBranchAddress("GenTaus_had", &GenTaus_had, &b_GenTaus_had);
    fChain->SetBranchStatus("GenTaus_had",1);
+*/
    /*
    fChain->SetBranchAddress("GenTaus_LeadRecoTrkAct", &GenTaus_LeadRecoTrkAct, &b_GenTaus_LeadRecoTrkAct);
    fChain->SetBranchAddress("GenTaus_LeadRecoTrkd3", &GenTaus_LeadRecoTrkd3, &b_GenTaus_LeadRecoTrkd3);
@@ -1342,8 +1354,8 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    fChain->SetBranchAddress("JetsJERup_muonEnergyFraction", &JetsJERup_muonEnergyFraction, &b_JetsJERup_muonEnergyFraction);
    fChain->SetBranchAddress("JetsJERup_partonFlavor", &JetsJERup_partonFlavor, &b_JetsJERup_partonFlavor);
 */
-   fChain->SetBranchAddress("madHT", &madHT, &b_madHT);
-   fChain->SetBranchStatus("madHT",1);
+   //   fChain->SetBranchAddress("madHT", &madHT, &b_madHT);
+   //   fChain->SetBranchStatus("madHT",1);
 
    //fChain->SetBranchAddress("madMinDeltaRStatus", &madMinDeltaRStatus, &b_madMinDeltaRStatus);
    //fChain->SetBranchAddress("madMinPhotonDeltaR", &madMinPhotonDeltaR, &b_madMinPhotonDeltaR);
@@ -1415,9 +1427,10 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    fChain->SetBranchStatus("NJets",1);
 
    //fChain->SetBranchAddress("NJetsclean", &NJetsclean, &b_NJetsclean);
-   fChain->SetBranchAddress("NJetsISR", &NJetsISR, &b_NJetsISR);
+   /*
+     fChain->SetBranchAddress("NJetsISR", &NJetsISR, &b_NJetsISR);
    fChain->SetBranchStatus("NJetsISR",1);
-
+*/
    //fChain->SetBranchAddress("NJetsISRclean", &NJetsISRclean, &b_NJetsISRclean);
    //fChain->SetBranchAddress("NJetsISRJECdown", &NJetsISRJECdown, &b_NJetsISRJECdown);
    //fChain->SetBranchAddress("NJetsISRJECup", &NJetsISRJECup, &b_NJetsISRJECup);
@@ -1464,9 +1477,10 @@ void NtupleVariables::Init(TTree *tree, string nameData)
    //   fChain->SetBranchAddress("PmssmId", &PmssmId, &b_PmssmId);
    //fChain->SetBranchAddress("puSysDown", &puSysDown, &b_puSysDown);
    //fChain->SetBranchAddress("puSysUp", &puSysUp, &b_puSysUp);
+   /*
    fChain->SetBranchAddress("puWeight", &puWeight, &b_puWeight);
    fChain->SetBranchStatus("puWeight",1);
-
+*/
    //   fChain->SetBranchAddress("ScaleWeights", &ScaleWeights, &b_ScaleWeights);
    //   fChain->SetBranchStatus("ScaleWeights",1);
 
@@ -1531,13 +1545,13 @@ void NtupleVariables::Init(TTree *tree, string nameData)
 
    //   fChain->SetBranchAddress("TriggerPrescales", &TriggerPrescales, &b_TriggerPrescales);
    //   fChain->SetBranchStatus("TriggerPrescales",1);
-
+   /*
    fChain->SetBranchAddress("TrueNumInteractions", &TrueNumInteractions, &b_TrueNumInteractions);
    fChain->SetBranchStatus("TrueNumInteractions",1);
 
    fChain->SetBranchAddress("Weight", &Weight, &b_Weight);
    fChain->SetBranchStatus("Weight",1);
-
+*/
    //fChain->SetBranchAddress("ZCandidates", &ZCandidates, &b_ZCandidates);
    Notify();
 }
