@@ -55,9 +55,9 @@ void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
   TBranch        *b_MHT=0;
   Double_t        MHT;  
 
-  //  Double_t        madHT;
+  Double_t        madHT;
 
-  //  TBranch        *b_madHT=0;
+  TBranch        *b_madHT=0;
 
   fChain->SetBranchAddress("RunNum", &RunNum, &b_RunNum);
   fChain->SetBranchStatus("RunNum", 1);
@@ -68,8 +68,8 @@ void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
   fChain->SetBranchAddress("MHT", &MHT, &b_MHT);
   fChain->SetBranchStatus("MHT", 1);
 
-  //  fChain->SetBranchAddress("madHT", &madHT, &b_madHT);
-  //  fChain->SetBranchStatus("madHT",1);
+  fChain->SetBranchAddress("madHT", &madHT, &b_madHT);
+  fChain->SetBranchStatus("madHT",1);
 
   Long64_t nbytes = 0, nb = 0;
   int decade = 0;
@@ -114,6 +114,8 @@ void SkimmingSR::EventLoop(const char *data,const char *inputFileList) {
 
     if(s_data.find("Tbar_SingleLep")!=string::npos || s_data.find("T_SingleLep")!=string::npos || s_data.find("DiLept")!=string::npos){
       Double_t madHTcut=600;   
+      if(madHT > madHTcut)
+	continue;
     }
     h_selectBaselineYields_->Fill(3);
     PassedEntry++; 
